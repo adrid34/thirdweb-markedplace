@@ -125,10 +125,12 @@ export function Token(props: Props) {
               )}
 
               {nft?.metadata?.attributes &&
-                // @ts-ignore TODO FIx later
-                nft?.metadata?.attributes.length > 0 && (
+                // Ensure attributes is always an array
+                ((Array.isArray(nft.metadata.attributes) && nft.metadata.attributes.length > 0) ? (
                   <NftAttributes attributes={nft.metadata.attributes} />
-                )}
+                ) : (
+                  <NftAttributes attributes={[nft.metadata.attributes]} />
+                ))}
 
               {nft && <NftDetails nft={nft} />}
             </Accordion>
